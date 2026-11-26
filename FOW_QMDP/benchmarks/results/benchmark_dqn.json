@@ -1,0 +1,272 @@
+{
+  "config": {
+    "batch_size": 256,
+    "bf16": false,
+    "cycle_steps_per_env": 100,
+    "cycle_updates": 32,
+    "device": "cuda",
+    "envs": 8,
+    "epsilon": 0.1,
+    "experiment_id": 0,
+    "inference_iters": 100,
+    "output": "benchmarks/results/benchmark_dqn.json",
+    "pin_memory": false,
+    "replay_capacity": 20000,
+    "seed": 20261026,
+    "shaping_lambda": 0.1,
+    "simulation_steps": 100,
+    "steps_per_env": 100,
+    "torch_threads": 1,
+    "updates": 32,
+    "warmup_collection_steps": 2,
+    "warmup_inference_iters": 10,
+    "warmup_simulation_steps": 5,
+    "warmup_updates": 3,
+    "workers": [
+      1,
+      2,
+      4,
+      8
+    ]
+  },
+  "hardware": {
+    "cpu_logical_cores": 16,
+    "device": "cuda:0",
+    "gpu_name": "NVIDIA GeForce RTX 5060 Ti",
+    "gpu_total_memory_bytes": 17074421760,
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.15",
+    "pytorch": "2.12.0.dev20260408+cu128",
+    "torch_cuda_build": "12.8"
+  },
+  "results": [
+    {
+      "collection": {
+        "agent_decisions": 397,
+        "completed_episodes": 8,
+        "extra_prefill_transitions_untimed": 0,
+        "forced_activations": 403,
+        "rewards_sum": 1.2999997809529305,
+        "seconds": 0.18288750003557652,
+        "transitions": 800,
+        "transitions_per_second": 4374.273801349893,
+        "wins": 1
+      },
+      "cycle": {
+        "activations_per_second": 2629.4217832293793,
+        "agent_decisions": 400,
+        "completed_episodes": 8,
+        "forced_activations": 400,
+        "gradient_updates": 32,
+        "seconds": 0.3042494000401348,
+        "transitions": 800,
+        "updates_per_second": 105.17687132917517
+      },
+      "envs": 8,
+      "gpu_peak_allocated_bytes": 107715584,
+      "gpu_peak_reserved_bytes": 136314880,
+      "inference": {
+        "batch_calls": 100,
+        "batches_per_second": 1134.9024489880453,
+        "milliseconds_per_batch": 0.8811330003663898,
+        "observations": 800,
+        "observations_per_second": 9079.219591904362,
+        "seconds": 0.08811330003663898
+      },
+      "replay_bytes": 54460000,
+      "simulation": {
+        "activations": 800,
+        "activations_per_second": 10573.81448238172,
+        "completed_episodes": 8,
+        "forced_activations": 403,
+        "rewards_sum": 3.2999999299645424,
+        "seconds": 0.07565859996248037
+      },
+      "updates": {
+        "batch_size": 256,
+        "last_grad_norm": 0.047958869487047195,
+        "last_loss": 0.01909453049302101,
+        "last_mean_q": -0.0183495432138443,
+        "last_mean_target": -0.00816778652369976,
+        "sampled_transitions_per_second": 70485.73379063755,
+        "seconds": 0.11622209998313338,
+        "target_syncs": 0,
+        "updates": 32,
+        "updates_per_second": 275.3348976196779
+      },
+      "worker_startup_seconds": 0.16507019998971373,
+      "workers": 1
+    },
+    {
+      "collection": {
+        "agent_decisions": 397,
+        "completed_episodes": 8,
+        "extra_prefill_transitions_untimed": 0,
+        "forced_activations": 403,
+        "rewards_sum": 1.2999997809529305,
+        "seconds": 0.17713379999622703,
+        "transitions": 800,
+        "transitions_per_second": 4516.359949467804,
+        "wins": 1
+      },
+      "cycle": {
+        "activations_per_second": 2713.8947681328636,
+        "agent_decisions": 400,
+        "completed_episodes": 8,
+        "forced_activations": 400,
+        "gradient_updates": 32,
+        "seconds": 0.29477929999120533,
+        "transitions": 800,
+        "updates_per_second": 108.55579072531454
+      },
+      "envs": 8,
+      "gpu_peak_allocated_bytes": 107715584,
+      "gpu_peak_reserved_bytes": 136314880,
+      "inference": {
+        "batch_calls": 100,
+        "batches_per_second": 1110.388124271614,
+        "milliseconds_per_batch": 0.9005860006436706,
+        "observations": 800,
+        "observations_per_second": 8883.104994172912,
+        "seconds": 0.09005860006436706
+      },
+      "replay_bytes": 54460000,
+      "simulation": {
+        "activations": 800,
+        "activations_per_second": 14073.38212958037,
+        "completed_episodes": 8,
+        "forced_activations": 403,
+        "rewards_sum": 3.2999999299645424,
+        "seconds": 0.05684490001294762
+      },
+      "updates": {
+        "batch_size": 256,
+        "last_grad_norm": 0.047958869487047195,
+        "last_loss": 0.01909453049302101,
+        "last_mean_q": -0.0183495432138443,
+        "last_mean_target": -0.00816778652369976,
+        "sampled_transitions_per_second": 71019.74711571872,
+        "seconds": 0.11534820008091629,
+        "target_syncs": 0,
+        "updates": 32,
+        "updates_per_second": 277.42088717077627
+      },
+      "worker_startup_seconds": 0.1660385999130085,
+      "workers": 2
+    },
+    {
+      "collection": {
+        "agent_decisions": 397,
+        "completed_episodes": 8,
+        "extra_prefill_transitions_untimed": 0,
+        "forced_activations": 403,
+        "rewards_sum": 1.2999997809529305,
+        "seconds": 0.16583049995824695,
+        "transitions": 800,
+        "transitions_per_second": 4824.203027799019,
+        "wins": 1
+      },
+      "cycle": {
+        "activations_per_second": 2814.9329367474434,
+        "agent_decisions": 400,
+        "completed_episodes": 8,
+        "forced_activations": 400,
+        "gradient_updates": 32,
+        "seconds": 0.28419860010035336,
+        "transitions": 800,
+        "updates_per_second": 112.59731746989775
+      },
+      "envs": 8,
+      "gpu_peak_allocated_bytes": 107715584,
+      "gpu_peak_reserved_bytes": 136314880,
+      "inference": {
+        "batch_calls": 100,
+        "batches_per_second": 1127.3436065023138,
+        "milliseconds_per_batch": 0.8870409999508411,
+        "observations": 800,
+        "observations_per_second": 9018.74885201851,
+        "seconds": 0.0887040999950841
+      },
+      "replay_bytes": 54460000,
+      "simulation": {
+        "activations": 800,
+        "activations_per_second": 16462.599013033803,
+        "completed_episodes": 8,
+        "forced_activations": 403,
+        "rewards_sum": 3.2999999299645424,
+        "seconds": 0.04859500005841255
+      },
+      "updates": {
+        "batch_size": 256,
+        "last_grad_norm": 0.047958869487047195,
+        "last_loss": 0.01909453049302101,
+        "last_mean_q": -0.0183495432138443,
+        "last_mean_target": -0.00816778652369976,
+        "sampled_transitions_per_second": 67928.21433430156,
+        "seconds": 0.12059790000785142,
+        "target_syncs": 0,
+        "updates": 32,
+        "updates_per_second": 265.3445872433655
+      },
+      "worker_startup_seconds": 0.18111969996243715,
+      "workers": 4
+    },
+    {
+      "collection": {
+        "agent_decisions": 397,
+        "completed_episodes": 8,
+        "extra_prefill_transitions_untimed": 0,
+        "forced_activations": 403,
+        "rewards_sum": 1.2999997809529305,
+        "seconds": 0.18437699996866286,
+        "transitions": 800,
+        "transitions_per_second": 4338.935985160675,
+        "wins": 1
+      },
+      "cycle": {
+        "activations_per_second": 2678.2447190314792,
+        "agent_decisions": 400,
+        "completed_episodes": 8,
+        "forced_activations": 400,
+        "gradient_updates": 32,
+        "seconds": 0.2987030999502167,
+        "transitions": 800,
+        "updates_per_second": 107.12978876125916
+      },
+      "envs": 8,
+      "gpu_peak_allocated_bytes": 107715584,
+      "gpu_peak_reserved_bytes": 136314880,
+      "inference": {
+        "batch_calls": 100,
+        "batches_per_second": 1116.4614431575765,
+        "milliseconds_per_batch": 0.8956869994290173,
+        "observations": 800,
+        "observations_per_second": 8931.691545260612,
+        "seconds": 0.08956869994290173
+      },
+      "replay_bytes": 54460000,
+      "simulation": {
+        "activations": 800,
+        "activations_per_second": 13896.319574201878,
+        "completed_episodes": 8,
+        "forced_activations": 403,
+        "rewards_sum": 3.2999999299645424,
+        "seconds": 0.05756919994018972
+      },
+      "updates": {
+        "batch_size": 256,
+        "last_grad_norm": 0.047958869487047195,
+        "last_loss": 0.01909453049302101,
+        "last_mean_q": -0.0183495432138443,
+        "last_mean_target": -0.00816778652369976,
+        "sampled_transitions_per_second": 70309.50947057769,
+        "seconds": 0.11651339998934418,
+        "target_syncs": 0,
+        "updates": 32,
+        "updates_per_second": 274.6465213694441
+      },
+      "worker_startup_seconds": 0.2276298999786377,
+      "workers": 8
+    }
+  ]
+}

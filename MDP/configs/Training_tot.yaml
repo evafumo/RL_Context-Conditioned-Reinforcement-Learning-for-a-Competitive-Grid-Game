@@ -1,0 +1,53 @@
+# Giulio2 - Training_tot
+# Esperimento DQN standard (NON Double DQN) indipendente dai training precedenti.
+# Avvio dalla cartella Giulio2/: python train.py --config configs/Training_5.yaml
+# La rete viene inizializzata da zero: non usare --resume.
+# Checkpoint: 20k, 40k, ..., 640k (32 checkpoint, a confine episodio).
+# La valutazione dei checkpoint e' separata da questo training.
+
+train:
+  # RTX 5060 Ti: rete e aggiornamenti PyTorch su CUDA; simulatore su CPU.
+  device: "cuda:0"
+  output_dir: "runs/Training_tot"
+
+  # Seed ed esperimento distinti dai training precedenti.
+  seed: 20261101
+  experiment_id: 5
+  deterministic_algorithms: false
+
+  # Parametri di parallelizzazione selezionati dal benchmark.
+  num_envs: 8
+  num_workers: 4
+  steps_per_env: 100
+
+  # 640k attivazioni = 6400 episodi da 100 attivazioni (incluse DUMMY).
+  total_activations: 1000000
+  shaping_lambda: 0.1
+
+  # DQN standard: replay uniforme, aggiornamenti dopo ogni raccolta.
+  replay_capacity: 50000
+  batch_size: 256
+  warmup_activations: 8000
+  updates_per_collection: 32
+
+  # Epsilon-greedy sulle sole azioni legali.
+  # Epsilon decresce linearmente da 1.0 a 0.0 nelle prime 400k attivazioni.
+  # Da 400k a 640k la selezione delle azioni e' greedy (epsilon = 0).
+  epsilon:
+    start: 1.0
+    end: 0.05
+    decay_activations: 8000000
+
+  # Logging delle metriche B e salvataggio checkpoint.
+  checkpoint_every_activations: 100000
+  log_update_every: 10
+  pin_memory: false
+
+dqn:
+  gamma: 1.0
+  learning_rate: 0.0001
+  target_sync_interval: 1000
+  huber_delta: 1.0
+  grad_clip_norm: 10.0
+  weight_decay: 0.0
+  use_bfloat16_amp: false

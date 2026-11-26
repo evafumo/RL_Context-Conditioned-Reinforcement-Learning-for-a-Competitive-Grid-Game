@@ -1,0 +1,12 @@
+info 
+
+per il QMDP 
+
+python train.py --device cuda:0 --output-dir runs/full
+python evaluate.py --checkpoint runs/full/checkpoint_80000.pt --device cuda:0 --observation qmdp --fog-radius 4 --output-dir evaluations/qmdp
+
+
+per il belief + DQN
+
+python train.py --device cuda:0 --fog-of-war --fog-radius 4 --belief-filter --output-dir runs/belief
+python evaluate.py --checkpoint runs/belief/checkpoint_80000.pt --device cuda:0 --observation belief --fog-radius 4 --output-dir evaluations/belief

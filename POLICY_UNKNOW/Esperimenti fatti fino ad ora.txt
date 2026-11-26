@@ -1,0 +1,10 @@
+Tarining a 320k attivazioni
+Training_1 	20261029(seed)	160k(decadimento epsilon)	Riferimento(scopo)
+Training_2 	20261030(seed)	160k(decadimento epsilon)	Verificare la riproducibilità(scopo)
+Training_3	20261029(seed)	240k(decadimento epsilon)	Studiare l'effetto di ε(scopo)
+
+
+
+Tarining a 640k attivazioni
+Tarining_5	20261101(seed)	400k(decadimento epsilon)				
+Training_6	20261102(seed)	400k(decadimento epsilon)				

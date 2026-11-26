@@ -1,0 +1,58 @@
+# Giulio2 - Training_tot
+# Belief-DQN con Fog of War, DQN standard (NON Double DQN).
+# Avvio dalla radice FOW/: python train.py --config configs/Training_tot.yaml
+# Fase 1 da zero a 1M; fase 2 con --resume fino a 10M.
+# Checkpoint: 100k ... 1M (fase 1); 2M ... 10M (fase 2).
+# La valutazione dei checkpoint e' separata da questo training.
+
+train:
+  # RTX 5060 Ti: rete e aggiornamenti PyTorch su CUDA; simulatore su CPU.
+  device: "cuda:0"
+  output_dir: "runs/Training_tot"
+
+  # Seed ed esperimento distinti dai training precedenti.
+  seed: 20261101
+  experiment_id: 5
+  deterministic_algorithms: false
+
+  # Parametri di parallelizzazione selezionati dal benchmark.
+  num_envs: 8
+  num_workers: 4
+  steps_per_env: 100
+
+  # Fase 1: 1M attivazioni = 10000 episodi da 100 attivazioni (incluse DUMMY).
+  total_activations: 1000000
+  shaping_lambda: 0.1
+
+  # Training POMDP: posizione avversaria sostituita dalla belief bayesiana.
+  fog_of_war: true
+  fog_radius: 4
+  belief_filter: true
+
+  # DQN standard: replay uniforme, aggiornamenti dopo ogni raccolta.
+  replay_capacity: 50000
+  batch_size: 256
+  warmup_activations: 8000
+  updates_per_collection: 32
+
+  # Epsilon-greedy sulle sole azioni legali.
+  # Epsilon decresce linearmente da 1.0 a 0.05 nelle prime 8M attivazioni.
+  # Da 8M a 10M la policy esplora ancora con probabilita' 0.05.
+  epsilon:
+    start: 1.0
+    end: 0.05
+    decay_activations: 8000000
+
+  # Logging delle metriche B e salvataggio checkpoint.
+  checkpoint_every_activations: 100000
+  log_update_every: 10
+  pin_memory: false
+
+dqn:
+  gamma: 1.0
+  learning_rate: 0.0001
+  target_sync_interval: 1000
+  huber_delta: 1.0
+  grad_clip_norm: 10.0
+  weight_decay: 0.0
+  use_bfloat16_amp: false

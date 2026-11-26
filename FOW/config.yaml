@@ -1,0 +1,53 @@
+# Giulio2 — Context-Conditioned Masked DQN standard (non Double DQN)
+# Lettura: python train.py --config config.yaml
+# Le sezioni riconosciute da train.py sono esclusivamente "train" e "dqn".
+# 4 mappe x 6 avversari = 24 contesti; simulatore con 100 attivazioni.
+
+train:
+  # PyTorch sulla RTX 5060 Ti (16 GB); worker della simulazione su CPU.
+  device: "cuda:0"
+  output_dir: "runs/dqn_pilot"
+
+  # Riproducibilita'.
+  seed: 20261026
+  experiment_id: 0
+  deterministic_algorithms: false
+
+  # Parallelizzazione Windows: multiprocessing spawn (gestito dal codice).
+  num_envs: 8
+  num_workers: 4
+  steps_per_env: 100
+
+  # 80 000 e' multiplo di (num_envs * 100): checkpoint a fine episodio.
+  total_activations: 80000
+  shaping_lambda: 0.1
+
+  # Replay uniforme in RAM CPU; i minibatch sono trasferiti alla GPU.
+  replay_capacity: 50000
+  batch_size: 256
+  warmup_activations: 8000
+  updates_per_collection: 32
+
+  # Epsilon decresce in funzione delle attivazioni MDP, incluse DUMMY.
+  epsilon:
+    start: 1.0
+    end: 0.05
+    decay_activations: 160000
+
+  # Logging, checkpoint e trasferimenti GPU.
+  checkpoint_every_activations: 20000
+  log_update_every: 10
+  pin_memory: false
+
+  # Per riprendere un esperimento: passare --resume PERCORSO al CLI.
+
+# Target network classica: max dei Q-value legali calcolato solo dalla
+# target network; nessuna selezione dell'azione con la rete online.
+dqn:
+  gamma: 1.0
+  learning_rate: 0.0001
+  target_sync_interval: 1000
+  huber_delta: 1.0
+  grad_clip_norm: 10.0
+  weight_decay: 0.0
+  use_bfloat16_amp: false

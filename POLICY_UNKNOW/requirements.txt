@@ -1,0 +1,16 @@
+# Giulio2 — Windows 11 / RTX 5060 Ti 16 GB / Python 3.11
+# Indice aggiuntivo per la build CUDA 12.8 di PyTorch (Blackwell / RTX 50).
+# Installazione: python -m pip install -r requirements.txt
+# Richiede driver NVIDIA compatibile con CUDA 12.8.
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+# Inferenza e ottimizzazione DQN su GPU. Non servono torchvision/torchaudio.
+torch==2.9.1+cu128
+
+# Osservazioni, replay buffer, configurazione YAML e test.
+numpy>=1.26,<3.0
+PyYAML>=6.0,<7.0
+pytest>=8.0,<10.0
+
+# Analisi offline e grafici PNG delle metriche A/B/C.
+matplotlib>=3.8,<4.0

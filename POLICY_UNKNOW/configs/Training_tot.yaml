@@ -1,0 +1,52 @@
+# Giulio4 - Training_10: DQN standard con canale BFS (5, 9, 9).
+# Training indipendente da zero per 10 milioni di attivazioni.
+# Avvio: python train.py --config configs/Training_10.yaml
+# NON usare --resume per avviare questo esperimento da zero.
+# Checkpoint: 500k, 1M, 1.5M, ... 10M (20 checkpoint).
+# Valutazione separata dal training.
+# Regolamento e reward invariati: obiettivo +5 VP, kill +2 VP, morte -5 VP.
+
+train:
+  # La rete e' addestrata sulla RTX 5060 Ti; il simulatore usa la CPU.
+  device: "cuda:0"
+  output_dir: "runs/Training_tot"
+
+  # Seed come da configurazione proposta; ID dell'esperimento 10.
+  seed: 20261101
+  experiment_id: 5
+  deterministic_algorithms: false
+
+  num_envs: 8
+  num_workers: 4
+  steps_per_env: 100
+
+  # 1.000.000 attivazioni = 10.000 episodi (incluse DUMMY).
+  total_activations: 1000000
+  shaping_lambda: 0.1
+
+  # DQN standard (non Double DQN), replay uniforme.
+  replay_capacity: 50000
+  batch_size: 256
+  warmup_activations: 8000
+  updates_per_collection: 32
+
+  # Mantiene lo schedule indicato nell'esempio.
+  # Dopo 8mln attivazioni epsilon resta 0.05, non diventa greedy puro.
+  epsilon:
+    start: 1.0
+    end: 0.05
+    decay_activations: 8000000
+
+  # Riduce spazio su disco e costo delle valutazioni successive.
+  checkpoint_every_activations: 100000
+  log_update_every: 10
+  pin_memory: false
+
+dqn:
+  gamma: 1.0
+  learning_rate: 0.0001
+  target_sync_interval: 1000
+  huber_delta: 1.0
+  grad_clip_norm: 10.0
+  weight_decay: 0.0
+  use_bfloat16_amp: false
